@@ -1,0 +1,409 @@
+; This is a sample input file with various errors
+; Error: Invalid label (starts with a number)
+1invalidlabel: mov r1, r2
+; Error: Reserved word used as label
+mov: .data 5
+; Error: Label too long (exceeds 31 characters)
+thislabeliswaytoolongandshouldcauseanerror: add r1, #5
+; Error: Undefined label
+jmp undefinedlabel
+; Error: Multiple definition of label
+duplicateLabel: .string "Hello"
+duplicateLabel: mov r3, r4
+; Error: Invalid operation name
+invalidop r1, r2
+; Error: Wrong number of operands
+mov r1
+add r1, r2, r3
+; Error: Invalid addressing mode for instruction
+    mov #1, #2
+; Error: Invalid register name
+mov r8, r1
+; Error: Invalid number format
+    .data 3.14
+; Error: Unclosed string
+    .string "Unclosed string
+; Error: Invalid characters in string
+    .string "Invalid \ character"
+; Error: Comma after last operand
+mov r1, r2,
+; Error: Missing comma between operands
+mov r1 r2
+; Error: Invalid external label name
+    .extern 123invalid
+; Error: Invalid entry label (not defined in the file)
+.entry nonexistentlabel
+; Error: Invalid directive
+    .invaliddirective 10
+; Error: Label defined after operation
+    ; Error: Invalid addressing mode combination
+lea #5, r1
+; Error: Invalid use of string as operand
+mov "string", r1
+; Error: Extraneous text after end of command
+stop extraneoustext
+; Error: Line exceeding maximum length (assuming a max length)
+; Error: Invalid character in label
+invalid@label: mov r1, r2
+; Error: Missing colon after label
+missingcolonlabel mov r1, r2
+; Error: Invalid operand for specific instruction
+clr #5
+; Error: Empty directive
+    .data
+; Error: Invalid use of register in .data directive
+    .data r1
+; Error: Invalid hex number (assuming hex is not supported)
+mov r1, #0xFF
+; Error: Misuse of asterisk for indirect addressing
+mov *r1, 5
+; Error: Attempt to use a string where a number is expected
+add r1, "5"
+; Error: Use of undefined symbol in expression
+mov r1, #undefinedsymbol
+; Error: Invalid use of external label
+mov .extern externallabel, r1
+; Error: Invalid negative number in .data directive
+    .data -
+; Error: Invalid use of comma in label
+invalid,label: mov r1, r2
+; Error: Invalid operand type for lea instruction
+lea #5, r1
+; Error: Missing operand for two-operand instruction
+sub r1,
+; Error: Extra comma in data definition
+    .data 1, , 2
+; Error: Invalid entry of external label
+    .extern extlabel
+    .entry extlabel
+; Error: Invalid use of string in arithmetic operation
+add r1, "string"
+; Error: Attempt to use a directive as an instruction
+    .string r1, r2
+; Error: Invalid label name (using reserved word)
+string: mov r1, r2
+; Error: Misuse of comment symbol
+mov r1 ; r2
+; Error: Invalid use of space in label name
+invalid label: mov r1, r2
+; Error: Attempt to define a label twice in the same line
+doublelabel: doublelabel: mov r1, r2
+; Error: Use of unmatched quotation marks
+    .string "Unmatched quote
+; Error: Invalid escape sequence in string
+    .string "Invalid \z escape"
+; Error: Attempt to use a number as a label
+5: mov r1, r2
+; Error: Invalid use of parentheses (assuming they're not supported)
+mov (r1), r2
+; Error: Attempt to use a string as a jump target
+jmp "invalidjump"
+; Error: Invalid binary number (assuming binary isn't supported)
+mov r1, #0b1010
+; Error: Use of uppercase letters in instruction (assuming case-sensitive)
+MOV r1, r2
+; Error: Invalid use of plus sign in immediate addressing
+mov r1, #+5
+; Error: Attempt to use floating-point number
+mov r1, #3.14
+; Error: Invalid use of register in string directive
+    .string r1
+; Error: Attempt to use label in immediate addressing without '#'
+mov r1, labelname
+; Error: Invalid use of comma in immediate value
+mov r1, #1,000
+; Error: Attempt to use non-existent addressing mode
+mov @r1, r2
+; Error: Invalid combination of directives
+    .entry .extern invalidcombo
+; Error: Attempt to redefine a pre-defined symbol (assuming 'r1' is pre-defined)
+r1: mov r2, r3
+; Error: Missing quotation marks in string
+    .string Hello World
+; Error: Invalid use of colon
+mov: r1, r2
+; Error: Attempt to use a directive name as a label
+data: mov r1, r2
+; Error: Invalid character in number
+mov r1, #12a34
+; Error: Use of tab character in label name
+invalid	label: mov r1, r2
+; Error: Invalid use of negative number in address
+mov -r1, r2
+; Error: Misplaced directive
+mov r1, r2
+    .data 5
+; Error: Invalid use of entry directive on non-existent label
+    .entry nonexistentlabel
+; Error: Attempt to use a string as a number in data directive
+    .data "5"
+; Error: Invalid use of register in lea instruction
+lea r1, r2
+; Error: Invalid use of immediate addressing in destination operand for mov
+    mov r1, #5
+; Error: Attempt to jump to a register
+jmp r1
+; Error: Invalid use of external label in source file
+extlabel: mov r1, r2
+; Error: Misuse of stop instruction with operands
+    stop r1
+; Error: Attempt to use non-existent addressing mode combination
+mov *r1, *r2
+; Error: Attempt to use a number as an instruction
+1234 r1, r2
+; Error: Attempt to use a string as a register
+mov "r1", r2
+; Error: Invalid use of immediate addressing with lea
+    lea #5, label
+; Error: Attempt to define a label with only underscores
+: mov r1, r2
+; Error: Invalid use of register name as label
+r1: mov r2, r3
+; Error: Invalid use of directive name as instruction
+data 5, 6, 7
+; Error: Attempt to use a label as an instruction
+somelabel: somelabel r1, r2
+; Error: Attempt to use a string as an address
+jmp "invalidaddress"
+; Error: Invalid use of immediate addressing in jsr instruction
+jsr #5
+; Error: Invalid use of register in string termination
+    .string "Hello"r1
+; Error: Attempt to use a label in register field
+mov label, r2
+; Error: Invalid use of entry directive on a string
+    .string "entrystring"
+    .entry entrystring
+; Error: Attempt to use immediate addressing with jmp
+    jmp #10
+; Error: Invalid use of external directive on a pre-defined symbol
+    .extern r1
+; Error: Invalid use of register indirect addressing with immediate value
+mov *#5, r1
+; Error: Invalid use of string in lea instruction
+lea "string", r1
+; Error: Attempt to use immediate addressing with prn
+prn #5
+; Error: Invalid use of entry directive on an external label
+    .extern extlabel
+    .entry extlabel
+; Error: Attempt to use a directive as an operand
+mov .data, r1
+; Error: Invalid use of register in data directive
+    .data r1, 5, 6
+; Error: Attempt to define a label starting with a dot
+    .invalidlabel: mov r1, r2
+; Error: Invalid use of string as label
+"stringlabel": mov r1, r2
+; Error: Attempt to use immediate addressing in source operand for cmp
+cmp #5, r1
+; Error: Attempt to use a label as a register
+mov r1, somelabel
+; Error: Invalid use of immediate addressing in both operands
+add #5, #10
+; Error: Attempt to use a string as a number in immediate addressing
+mov r1, #"5"
+; Error: Attempt to use a label in string directive
+    .string labelname
+; Error: Invalid use of register indirect addressing with string
+    mov *"string", r1
+    ; Error: Attempt to use immediate addressing with rts
+    rts #5
+; Error: Invalid use of negative number in lea instruction
+lea #-5, r1
+; Error: Attempt to use a string in immediate addressing
+mov r1, #"string"
+; Error: Invalid use of register name as directive
+mov .r1, r2
+; Error: Attempt to use a number in string termination
+    .string "string"5
+; Error: Invalid use of label in data directive
+    .data somelabel
+; Error: Invalid use of register indirect addressing with immediate value
+mov *#5, r2
+; Error: Attempt to use a label as addressing mode in lea instruction
+lea label, r1
+; Error: Invalid use of string termination in the middle of a string
+    .string "Invalid "middle" string"
+; Error: Attempt to use immediate addressing in both operands for add
+    add #5, #10
+; Error: Invalid use of entry directive on a string
+    .entry "entrystring"
+; Error: Attempt to use a string as a directive
+    .string "invaliddirective"
+; Error: Invalid use of register in directive
+    .string r1, "Hello"
+; Error: Attempt to use a directive as a register
+mov .data, r1
+; Error: Attempt to use a number as a directive
+5 .data 5, 6, 7
+; Error: Invalid use of register name as directive
+    .entry r1
+; Error: Attempt to use immediate addressing in destination operand of mov
+mov r1, #5
+; Error: Invalid use of string as an operand
+jmp "invalidstring"
+; Error: Attempt to use a directive in data definition
+    .data .data
+; Error: Invalid use of negative number in cmp instruction
+cmp #-5, r1
+; Error: Attempt to use register indirect addressing in both operands of mov
+mov *r1, *r2
+; Error: Invalid use of entry directive on immediate value
+    .entry #5
+; Error: Invalid use of register in stop instruction
+stop r1
+; Error: Attempt to use a string in data definition
+    .data "invaliddata"
+; Error: Attempt to use immediate addressing in source operand of lea
+lea #5, r1
+; Error: Invalid use of directive in data definition
+    .data .string "invalid"
+; Error: Invalid use of string as addressing mode in cmp instruction
+cmp "invalid", r1
+; Error: Attempt to use a number as a directive
+5 .entry 5, 6
+; Error: Invalid use of register name as string content
+    .string "r1"
+; Error: Attempt to use immediate addressing in destination operand for sub
+sub r1, #5
+; Error: Invalid use of directive as addressing mode
+mov .data, r1
+; Error: Attempt to use a number as label name
+12345: mov r1, r2
+; Error: Invalid use of register name as string
+mov "r1", r2
+; Error: Attempt to use a string as immediate addressing
+mov r1, #"string"
+; Error: Invalid use of directive in string definition
+    .string ".data"
+; Error: Attempt to use a label in immediate addressing without '#'
+mov r1, labelname
+; Error: Invalid use of directive in operand
+mov r1, .string
+; Error: Attempt to use immediate addressing with stop
+    stop #5
+; Error: Invalid use of string as addressing mode
+mov "invalid", r1
+; Error: Attempt to use register indirect addressing in both operands
+mov *r1, *r2
+; Error: Invalid use of immediate addressing in source operand of cmp
+cmp #5, r1
+; Error: Attempt to use a label in destination operand of mov
+mov r1, label
+; Error: Invalid use of directive in operand of mov
+mov .data, r2
+; Error: Attempt to use immediate addressing in destination operand for add
+add r1, #5
+; Error: Invalid use of string in source operand of lea
+lea "string", r1
+; Error: Attempt to use immediate addressing with cmp
+    cmp #5, r1
+; Error: Invalid use of directive as addressing mode
+mov .string, r1
+; Error: Attempt to use a label in data directive
+    .data somelabel
+; Error: Invalid use of string in immediate addressing
+mov r1, #"string"
+; Error: Attempt to use register indirect addressing in source operand of mov
+mov *r1, r2
+; Error: Invalid use of immediate addressing in destination operand of lea
+lea r1, #5
+; Error: Attempt to use register name as directive
+mov .r1, r2
+; Error: Invalid use of label in immediate addressing
+mov r1, label
+; Error: Attempt to use immediate addressing with lea
+    lea #5, r1
+; Error: Invalid use of string in addressing mode
+mov "invalid", r2
+; Error: Attempt to use a directive as register
+mov r1, .data
+; Error: Attempt to use a number as a label
+5: mov r1, r2
+; Error: Invalid use of label in data definition
+    .data somelabel
+; Error: Attempt to use a directive as label
+    .data: mov r1, r2
+; Error: Invalid use of string termination in middle of instruction
+mov r1, "invalid" r2
+; Error: Attempt to use a directive as a register
+mov .data, .string
+; Error: Invalid use of register indirect addressing
+mov *mmacr, r1
+; Error: Attempt to use immediate addressing with red
+    red #5
+; Error: Invalid use of external directive on a string
+    .extern "externalstring"
+; Error: Attempt to use a number as an addressing mode
+mov 1r1, r2
+; Error: Invalid use of entry directive on a number
+    .entry 12345
+; Error: Invalid use of string as addressing mode
+mov "r1", r2
+; Error: Attempt to use immediate addressing with dec
+    dec #5
+; Error: Invalid use of register name as string
+    .string r1
+; Error: Attempt to use a label as a directive
+somelabel 5, 6, 7
+; Error: Attempt to use immediate addressing with not
+    not #5
+; Error: Attempt to use a directive as addressing mode
+mov .data, r1
+; Error: Invalid use of register indirect addressing with jmp
+    jmp *r1
+    ; Error: Attempt to use a string as a macro
+"macrostring" r1, r2
+; Error: Invalid use of immediate addressing in both operands of lea
+lea #5, #10
+; Error: Attempt to use a number as a directive
+5 r1, r2, r3
+; Error: Invalid use of entry directive on immediate value
+    .entry #5
+; Error: Attempt to use register indirect addressing with stop
+    stop *r1
+    ; Error: Invalid use of string as addressing mode in lea
+lea "string", r1
+; Error: Invalid use of immediate addressing with inc
+    inc #5
+; Error: Attempt to use a label as string termination
+    .string "invalidstring"labelname
+; Error: Attempt to use immediate addressing with clr
+    clr #5
+; Error: Invalid use of directive as string content
+    .string ".data"
+; Error: Invalid use of string as jump target
+bne "invalidtarget"
+; Error: Attempt to use register indirect addressing with lea
+    lea *r1, r2
+    ; Error: Invalid use of immediate addressing in source operand of sub
+sub #5, r1
+; Error: Invalid use of register name as string content
+    .string "r1"
+; Error: Attempt to use immediate addressing with bne
+    bne #10
+; Error: Attempt to use a number as addressing mode in jsr
+jsr 5r1
+; Error: Invalid use of string as data value
+    .data "5"
+; Error: Attempt to use register indirect addressing with prn
+    prn *r1
+    ; Error: Invalid use of immediate addressing in destination operand of lea
+lea r1, #5
+; Error: Attempt to use a directive as jump target
+jmp .data
+; Error: Attempt to use a label as addressing mode
+mov labelname, r1
+; Error: Attempt to use immediate addressing with rts
+    rts #5
+; Error: Invalid use of register indirect addressing in data directive
+    .data *r1
+; Error: Attempt to use a string as addressing mode in cmp
+cmp "string", r1
+; Error: Attempt to use register indirect addressing with stop
+    stop *r1
+    ; Error: Invalid use of immediate addressing in both operands of mov
+mov #5, #10
+; Error: Attempt to use a directive as register
+mov r1, .data
